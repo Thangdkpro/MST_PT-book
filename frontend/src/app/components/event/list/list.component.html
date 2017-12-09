@@ -1,0 +1,112 @@
+<app-navbar></app-navbar>
+<div class=" container">
+<div class="row">
+   <label class='control-label col-md-1'>Search</label>
+  <input type="search" name="search" id="search" [(ngModel)]="text" (ngModelChange)="search($event)">
+  <div class="panel-heading col-xs-8 col-md-11">
+    <span class="lead"> <b> List of Events </b> </span>
+  </div>
+</div>
+
+  <div class="row">
+    <div class="event" *ngIf="eventList">
+      <div class="event" *ngFor="let event of eventList">
+        <div class="col-sm-6 col-md-3">
+
+          <div class="thumbnail">
+
+            <div class="caption">
+              <div>Event Name: {{event.name}}
+              </div>
+              <div>Description: {{event.description}}
+              </div>
+              <div>Date: {{event.date}}
+              </div>
+              <div>Localtion: {{event.location}}
+              </div>
+              <div>Priority: {{event.priority}}
+              </div>
+
+              <div>
+                <div class="clearfix-center">
+                  <button class="btn btn-danger" (click)="deleteEvent(event)">
+                    Delete
+                  </button>
+                  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" (click)="open(content, event)">Edit</button>
+                  <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" (click)="close()">&times;</button>
+                          <h4 class="modal-title"> Edit Event</h4>
+                        </div>
+                        <div class="modal-body">
+                          <div class='form-row'>
+                            <div class='col-xs-12 form-group card required'>
+                              <label class='control-label'>Event Name</label>
+                              <input type="text" name="eventname" id="eventname" [(ngModel)]="event.name" placeholder="EventName" class="form-control"
+                                required>
+                            </div>
+                          </div>
+                          <div class='form-row'>
+                            <div class='col-xs-12 form-group card required'>
+                              <label class='control-label'>Description</label>
+                              <input name="description" id="description" [(ngModel)]="event.description" placeholder="Description" class="form-control"
+                                required>
+                            </div>
+                          </div>
+                          <div class='form-row'>
+                            <div class='col-xs-12 form-group card required'>
+                              <label class='control-label'>Date</label>
+                              <input name="date" id="date" [(ngModel)]="event.date" placeholder="Date" class="form-control" required>
+                            </div>
+                          </div>
+                          <div class='form-row'>
+                            <div class='col-xs-12 form-group card required'>
+                              <label class='control-label'>Location</label>
+                              <input name="location" id="location" [(ngModel)]="event.location" placeholder="Location" class="form-control" required>
+                            </div>
+                          </div>
+                          <div class='form-row'>
+                            <div class='col-xs-12 form-group card required'>
+                              <label class='control-label'>Priority</label>
+                              <select name="priority" id="priority" [(ngModel)]="event.priority" placeholder="Priority" class="form-control" required>
+                                <option value="Important">Important</option>
+                                <option value="Unimportant">Unimportant</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-success" data-dismiss="modal" (click)="editEvent(event)">Save</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- pager -->
+    <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+      <li [ngClass]="{disabled:pager.currentPage === 1}">
+          <a (click)="setPage(1)">First</a>
+      </li>
+      <li [ngClass]="{disabled:pager.currentPage === 1}">
+          <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+      </li>
+      <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+          <a (click)="setPage(page)">{{page}}</a>
+      </li>
+      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+          <a (click)="setPage(pager.currentPage + 1)">Next</a>
+      </li>
+      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+          <a (click)="setPage(pager.totalPages)">Last</a>
+      </li>
+  </ul>
+</div>

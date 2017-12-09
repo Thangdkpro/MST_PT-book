@@ -1,0 +1,30 @@
+button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 6px;
+    cursor: pointer;
+}
+button1 {
+    background-color: #1b5e20; /* Green */
+    border: none;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 6px;
+    cursor: pointer;
+}
+.bgimg {
+    background-image: url('../../../environments/bg.jpg');
+    min-height: 100%;
+    background-position: center;
+    background-size: cover;
+}
